@@ -1,0 +1,78 @@
+
+//+------------------------------------------------------------------+
+//|                                              M W Scanner MT5    |
+//|                                forexroboteasy.com - Forex Robot Easy Team |
+//|                                             www.forexroboteasy.com |
+//+------------------------------------------------------------------+
+
+//+------------------------------------------------------------------+
+//|                            Global Variables                       |
+//+------------------------------------------------------------------+
+int g_symbolCount;          // Total number of symbols
+int g_currentSymbolIndex;   // Index of the current symbol being analyzed
+int g_timeframeCount;       // Total number of timeframes
+int g_currentTimeframeIndex; // Index of the current timeframe being analyzed
+
+//+------------------------------------------------------------------+
+//|                            OnInit Function                        |
+//+------------------------------------------------------------------+
+void OnInit()
+{
+   g_symbolCount = SymbolsTotal();
+   g_currentSymbolIndex = 0;
+   g_timeframeCount = 9; // Assuming we want to analyze 9 different timeframes
+   g_currentTimeframeIndex = 0;
+}
+
+//+------------------------------------------------------------------+
+//|                       OnStart Function                            |
+//+------------------------------------------------------------------+
+void OnStart()
+{
+   // Wait for the user to trigger the multi-timeframe scan
+   while (!IsButtonPressed())
+   {
+      Sleep(100); // Sleep for 100 milliseconds
+   }
+   
+   // Start the multi-timeframe scan
+   for (g_currentSymbolIndex = 0; g_currentSymbolIndex < g_symbolCount; g_currentSymbolIndex++)
+   {
+      for (g_currentTimeframeIndex = 0; g_currentTimeframeIndex < g_timeframeCount; g_currentTimeframeIndex++)
+      {
+         // Analyze the current symbol and timeframe
+         AnalyzeSymbolAndTimeframe(CurrentSymbol(), Timeframes[g_currentTimeframeIndex]);
+      }
+   }
+   
+   // Perform market analysis using the multi-timeframe scan results
+   PerformMarketAnalysis();
+}
+
+//+------------------------------------------------------------------+
+//|            AnalyzeSymbolAndTimeframe Function                     |
+//+------------------------------------------------------------------+
+void AnalyzeSymbolAndTimeframe(string symbol, ENUM_TIMEFRAMES timeframe)
+{
+   // Perform analysis for the given symbol and timeframe
+   // ... (code for analyzing the symbol and timeframe)
+}
+
+//+------------------------------------------------------------------+
+//|                PerformMarketAnalysis Function                     |
+//+------------------------------------------------------------------+
+void PerformMarketAnalysis()
+{
+   // Perform market analysis using the multi-timeframe scan results
+   // ... (code for market analysis)
+}
+
+//+------------------------------------------------------------------+
+//|                    IsButtonPressed Function                       |
+//+------------------------------------------------------------------+
+bool IsButtonPressed()
+{
+   // Check if the scanner button is pressed
+   // ... (code for checking if the button is pressed)
+   return true; // Placeholder value, replace with actual check
+}
